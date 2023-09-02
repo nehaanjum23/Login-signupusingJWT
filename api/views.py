@@ -3,6 +3,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from api.serializers import UserRegistrationSerializer, UserLoginSerializer
 from django.contrib.auth import authenticate
+from api.models import User 
 
 
 class UserRegistrationView(APIView):
@@ -15,7 +16,7 @@ class UserRegistrationView(APIView):
 
 class UserLoginView(APIView):
     def post(self, request):
-        serializer = UserLoginSerializer(data=request.data)
+        serializer = UserLoginSerializer(data=request.data, many=True)
         if serializer.is_valid(raise_exception = True):
             email = serializer.data.get('email')
             password = serializer.data.get('password')
