@@ -4,15 +4,16 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 # Register your models here.
 class UserModelAdmin(BaseUserAdmin):
-    list_display = ["id", "email", "name", "tc", "is_admin"]
+    list_display = ["id", "email", "name", "tc", "is_admin","created_at","updated_at"]
     list_filter = ["is_admin"]
     fieldsets = [
+        #This block defines the organization of the form fields in the user detail view. It groups related fields into sections or "fieldsets.
         ('User Crendentials', {"fields": ["email", "password"]}),
         ("Personal info", {"fields": ["name", "tc"]}),
         ("Permissions", {"fields": ["is_admin"]}),
     ]
     add_fieldsets = [
-        (
+        ( # this block defines the organization of fields for adding a new user.
             None,
             {
                 "classes": ["wide"],
@@ -20,10 +21,10 @@ class UserModelAdmin(BaseUserAdmin):
             },
         ),
     ]
-    search_fields = ["email"]
+    search_fields = ["email","id"]
     ordering = ["email", "id"]
-    filter_horizontal = []
-
+    filter_horizontal = [] #for selecting the data (checkbox )
+#The filter_horizontal attribute is typically used for ManyToMany fields in Django admin.
 
 
 admin.site.register(User, UserModelAdmin)
