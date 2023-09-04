@@ -21,9 +21,9 @@ class UserModelAdmin(BaseUserAdmin):
             },
         ),
     ]
-    search_fields = ["email"]
+    search_fields = ["email","id"]
     ordering = ["email", "id"]
-    filter_horizontal = []
+    filter_horizontal = [] #for selecting the data (checkbox )
 #The filter_horizontal attribute is typically used for ManyToMany fields in Django admin.
 
 
